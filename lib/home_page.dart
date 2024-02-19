@@ -270,14 +270,14 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     // Banner(),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0),
+                    const Padding(
+                      padding: EdgeInsets.all(2.0),
                       child: Align(
                         alignment: Alignment.topRight,
-                        child: Image.asset(
-                          'assets/images/heart.png',
-                          height: 20,
-                        ),
+                        child: Icon(color: Color(0xff0B4619),
+                          
+                          Icons.favorite_border
+                        )
                       ),
                     ),
                   ],

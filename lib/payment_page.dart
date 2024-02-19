@@ -9,6 +9,11 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
+   Map<String, dynamic> deliveryOptions = {
+    "delivery": true, "self": false
+    
+    };
+  int selectedRadio = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,17 +55,23 @@ class _PaymentPageState extends State<PaymentPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 58.0),
-                      child: Text(
-                        'ShreeVeg Wallet',
-                        style: GoogleFonts.poppins(
-                            fontSize: 14, fontWeight: FontWeight.w400),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
+                    RadioListTile(controlAffinity: ListTileControlAffinity.trailing,
+              activeColor: Color(0xff0B4619),
+             
+              
+                title: const Text('ShreeVeg Wallet'),
+              
+              value: 0,
+              groupValue: selectedRadio,
+              onChanged: (int? value) {
+                setState(() {
+                  selectedRadio = value!;
+                });
+              },
+             
+            ),
+                
+                  
                     Padding(
                       padding: const EdgeInsets.only(left: 58),
                       child: Container(
@@ -104,8 +115,17 @@ class _PaymentPageState extends State<PaymentPage> {
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 236, 235, 235),
                     borderRadius: BorderRadius.circular(9)),
-                child: const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start, children: []),
+                child:  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start, children: [
+
+                
+            paymentOption(index: 0, name: "Pay by any UPI App",image:'assets/images/upi.png' ),
+            paymentOption(index: 1, name: "GPay UPI",image:'assets/images/gpay.png'),
+            paymentOption(index: 2, name: "PhonePe UPI",image:'assets/images/ppay.png'),
+            paymentOption(index: 3, name: "CRED UPI",image:'assets/images/cred.png'),
+            paymentOption(index: 4, name: "Amazon Pay UPI",image:'assets/images/amazon.png'),
+            paymentOption(index: 5, name: "Paytm UPI",image:'assets/images/paytm.png'),
+                    ]),
               ),
               const SizedBox(
                 height: 24,
@@ -264,30 +284,13 @@ class _PaymentPageState extends State<PaymentPage> {
               const SizedBox(
                 height: 12,
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 62,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 236, 235, 235),
-                    borderRadius: BorderRadius.circular(9)),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 28.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              height: 24,
-                              width: 22,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: const Color(0xffD1D1D1)),
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: SizedBox(
+               RadioListTile(controlAffinity: ListTileControlAffinity.trailing,
+              activeColor: const Color(0xff0B4619),
+             
+              
+                title: Row(crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                   SizedBox(
                                 height: 10,
                                 width: 10,
                                 child: CircleAvatar(
@@ -298,35 +301,64 @@ class _PaymentPageState extends State<PaymentPage> {
                                           Image.asset('assets/images/rupe.png'),
                                     )),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Cash/ UPI on Delivery',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Text(
-                                  'Pay via Cash or UPI at the time of delivery ',
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 9, fontWeight: FontWeight.w400),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
+            
+                    SizedBox(width: 15,),
+                    Text('Cash/ UPI on Delivery',
+                  style: GoogleFonts.poppins(
+                      fontSize: 14, fontWeight: FontWeight.w400),)
+                ],
               ),
+              subtitle: Padding(
+                padding: const EdgeInsets.only(left: 25),
+                child: Text('Pay via Cash or UPI at the time of delivery ',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 9, fontWeight: FontWeight.w400),),
+              ),
+              
+              value: 0,
+              groupValue: selectedRadio,
+              onChanged: (int? value) {
+                setState(() {
+                  selectedRadio = value!;
+                });
+              },
+             
+            )
             ],
           ),
         ),
       ),
     );
+
   }
+   Widget paymentOption({required int index, required String name, required dynamic image}) {
+    return 
+   RadioListTile(controlAffinity: ListTileControlAffinity.trailing,
+              activeColor: Color(0xff0B4619),
+             
+              
+                title: Row(
+                children: [
+                  SizedBox(
+                    height: 24,
+                    width: 22,
+                    child: Image.asset(image)),
+                    const SizedBox(width: 15,),
+                    Text(name,
+                  style: GoogleFonts.poppins(
+                      fontSize: 14, fontWeight: FontWeight.w400),)
+                ],
+              ),
+              
+              
+              value: 0,
+              groupValue: selectedRadio,
+              onChanged: (int? value) {
+                setState(() {
+                  selectedRadio = value!;
+                });
+              },
+             
+            );
+}
 }
